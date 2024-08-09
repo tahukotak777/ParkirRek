@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+nav {
+    text-align: center;
+    margin: 1em 0;
+}
+
+main {
+    padding: 2em;
+}
+
+label {
+    display: block;
+    margin: 0.5em 0;
+}
+
+input {
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
+button {
+    padding: 0.7em;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.button {
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: #555;
+}
+
+#biayaParkir {
+    margin-top: 1em;
+    font-weight: bold;
+}
