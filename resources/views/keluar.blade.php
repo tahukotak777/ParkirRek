@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keluar Kendaraan</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
     <header>
@@ -13,12 +13,12 @@
     </header>
 
     <nav>
-        <a href="index.html" class="button">Masuk Kendaraan</a>
-        <a href="keluar.html" class="button">Keluar Kendaraan</a>
+        <a href="/" class="button">Masuk Kendaraan</a>
+        <a href="/keluar" class="button">Keluar Kendaraan</a>
     </nav>
 
     <main>
-        <form id="form-keluar">
+        <form id="form-keluar" action="/keluar/parkir" method="post">
             <label for="barcodeMasuk">Scan Barcode Masuk:</label>
             <input type="text" id="barcodeMasuk" name="barcodeMasuk" required>
 
