@@ -6,9 +6,9 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #dbdbdb;
     color: white;
-    padding: 0.10rem;
+    padding:0.1px ;
     text-align: center;
 }
 
@@ -54,13 +54,17 @@ button:hover {
 }
 
 .button {
-    display: inline-block;
+    display:flexbox; 
+    align-items: center;
+    height: 100vh;
     text-align: center;
     padding: 10px;
-    margin: 10px;
-    background-color: #333;
+    margin: 1px; /* Memberikan sedikit jarak antar tombol */
+    background-color: #4CAF50;
     color: white;
     text-decoration: none;
+    border-radius: 5px;
+    
 }
 
 .button:hover {
