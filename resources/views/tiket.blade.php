@@ -14,6 +14,12 @@
         <h1>PARKIR REKK!</h1>
     </header>
 
+    <nav>
+        <a href="/" class="button">Masuk Kendaraan</a>
+        <a href="/tiket" class="button">Barcode Karcis</a>
+
+    </nav>
+
     <main class="center">
         <div>
             <h1>tiket</h1>

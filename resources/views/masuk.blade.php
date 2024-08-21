@@ -14,6 +14,11 @@
         <h1>PARKIR REKK!</h1>
     </header>
 
+    <nav>
+        <a href="/" class="button">Masuk Kendaraan</a>
+        <a href="/tiket" class="button">Barcode Karcis</a>
+    </nav>
+
     <main>
 
         <form id="form-masuk" action="/masuk/parkir" method="post">
