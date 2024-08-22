@@ -1,6 +1,7 @@
 @vite('resources/css/app.css')
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +10,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.1.4/html5-qrcode.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
+
 <body>
     <header>
-        <h1>parkir rek!</h1>
+        <img src="{{asset("Image/MotoCycle.png")}}" alt="motor">
+        <h1>PARKIR REKK!</h1>
+        <img src="{{asset("Image/Car.png")}}" alt="Car">
     </header>
 
     <main class="center">
@@ -37,8 +41,12 @@
         }
 
         let html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader", { fps: 10, qrbox: 250 });
+            "reader", {
+                fps: 10,
+                qrbox: 250
+            });
         html5QrcodeScanner.render(onScanSuccess, onScanError);
     </script>
 </body>
+
 </html>

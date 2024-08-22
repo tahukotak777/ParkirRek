@@ -11,31 +11,46 @@
 
 <body>
     <header>
+        <img src="{{asset("Image/MotoCycle.png")}}" alt="motor">
         <h1>PARKIR REKK!</h1>
+        <img src="{{asset("Image/Car.png")}}" alt="Car">
     </header>
 
     <nav>
-        <a href="/" class="button">Masuk Kendaraan</a>
-        <a href="/tiket" class="button">Barcode Karcis</a>
-
+        <a href="/" class="button">Masuk Kendaraan <img src="{{asset("Image/Masuk.png")}}" alt="masuk"></a>
+        <a href="/tiket" class="button">Barcode Karcis <img src="{{asset("Image/Barcode.png")}}" alt="barcode"></a>
     </nav>
 
     <main class="center">
-        <div>
-            <h1>tiket</h1>
-            <h4>plat nomer: {{$plat}}</h4>
-            <h4>masuk tanggal: {{$tanggal}}</h4>
-            <h4>masuk jam: {{$jam}}</h4>
+        <div class="barcode">
+            <div>
+                <h1>tiket</h1>
+                <h4>plat nomer: {{$plat}}</h4>
+                <h4>masuk tanggal: {{$tanggal}}</h4>
+                <h4>masuk jam: {{$jam}}</h4>
+            </div>
+            <div class="qrcode">
+                {{ $qrCode }}
+            </div>
+            @if ($bayar)
+            <div>
+                <button>selesai pembayaran</button>
+            </div>
+            @endif
         </div>
-        <div class="qrcode">
-            {{ $qrCode }}
+
+        <div class="peraturan">
+            <h1>peraturan</h1>
+            <ul>
+                <li>Biaya parkir per 1 jam = Rp. 2.000</li>
+                <li>Denda parkir 24 jam = Rp. 100.000</li>
+                <li>Wajib Membawa STNK & Membawa Helm</li>
+            </ul>
         </div>
-        @if ($bayar)
-        <div>
-            <button>selesai pembayaran</button>
-        </div>
-        @endif
+
     </main>
+
+
 
 </body>
 

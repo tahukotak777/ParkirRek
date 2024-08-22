@@ -11,7 +11,9 @@
 
 <body>
     <header>
+        <img src="{{asset("Image/MotoCycle.png")}}" alt="motor">
         <h1>PARKIR REKK!</h1>
+        <img src="{{asset("Image/Car.png")}}" alt="Car">
     </header>
 
     <main class="center">
