@@ -14,6 +14,7 @@ Route::get('/scan', function () {
     return view('scan');
 });
 
+
 Route::get('/tiket', [IndexController::class,'tiket']);
 Route::get('/pembayaran', [IndexController::class,'pembayaran']);
 

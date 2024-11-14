@@ -12,13 +12,14 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class IndexController extends Controller
 {
-    public function masuk( Request $request) {
+    public function masuk(Request $request)
+    {
         $plat = $request->plat;
         $now = Carbon::now("asia/jakarta");
         $validator = Validator::make([
-            "plat"=>$plat
+            "plat" => $plat
         ], [
-            "plat"=>"required|string|uppercase|min:3|max:7"
+            "plat" => "required|string|uppercase|min:3|max:7"
         ]);
 
         if ($validator->fails()) {
@@ -26,23 +27,28 @@ class IndexController extends Controller
         }
 
         $post = masuk::create([
-            "plat"=>$request->plat,
-            "tanggal"=>$now,
-            "jam"=>$now,
+            "plat" => $request->plat,
+            "tanggal" => $now,
+            "jam" => $now,
         ]);
         $postId = $post->id;
 
         return redirect("/tiket")->withCookie("idMasuk", $postId);
     }
 
-    public function submitScan(Request $request) {
+    public function submitScan(Request $request)
+    {
         $id = $request->input('qrcode_result');
-        $masuk = masuk::find($id);
+
+        if (!$id || !($masuk = masuk::find($id))) {
+            abort(404);
+        }
+
         $now = Carbon::now("asia/jakarta");
         $lamaHari = date_diff(date_create($masuk->tanggal), date_create($now->format("y-m-d")))->d;
         $lamaJam = date_diff(date_create($masuk->jam), date_create($now->format("H:i:s")))->h;
         $biaya = 3000;
-        
+
         for ($i = 1; $i <= $lamaHari; $i++) {
             $biaya += 20000;
         }
@@ -52,52 +58,64 @@ class IndexController extends Controller
         }
 
         $post = keluar::create([
-            'plat'=>$masuk->plat,
-            'tanggal'=>$now,
-            'jam'=>$now,
-            'biaya'=>$biaya,
+            'plat' => $masuk->plat,
+            'tanggal' => $now,
+            'jam' => $now,
+            'biaya' => $biaya,
         ]);
 
         $postId = $post->id;
 
         return redirect("/pembayaran")->withCookies([
-            "idMasuk"=>cookie("idMasuk", $id),
-            "idKeluar"=>cookie("idKeluar", $postId),
+            "idMasuk" => cookie("idMasuk", $id),
+            "idKeluar" => cookie("idKeluar", $postId),
         ]);
     }
 
-    public function tiket(Request $request) {
+
+    public function tiket(Request $request)
+    {
         $id = $request->cookie("idMasuk");
+
+        if (!$id || !($sepeda = masuk::find($id))) {
+            abort(404);
+        }
+
         $qrCode = QrCode::size(300)->generate($id);
-        $sepeda = masuk::find($id);
 
         return view('tiket', [
-            'qrCode'=>$qrCode,
-            'plat'=>$sepeda->plat,
-            'tanggal'=>$sepeda->tanggal,
-            'jam'=>$sepeda->jam,
-            'bayar'=>$sepeda->pembayaran,
+            'qrCode' => $qrCode,
+            'plat' => $sepeda->plat,
+            'tanggal' => $sepeda->tanggal,
+            'jam' => $sepeda->jam,
+            'bayar' => $sepeda->pembayaran,
         ]);
     }
 
-    public function pembayaran(Request $request) {
+
+    public function pembayaran(Request $request)
+    {
         $id = $request->cookie("idKeluar");
-        $pembayaran = keluar::find($id);
+
+        if (!$id || !($pembayaran = keluar::find($id))) {
+            abort(404);
+        }
 
         return view('pembayaran', [
-            'pembayaran'=>$pembayaran,
+            'pembayaran' => $pembayaran,
         ]);
     }
 
-    public function bayar(Request $request) {
+
+    public function bayar(Request $request)
+    {
         $id = $request->cookie('idMasuk');
         $post = masuk::where("id", "=", $id)->update([
-            "pembayaran"=>true,
+            "pembayaran" => true,
         ]);
         Cookie::queue(Cookie::forget("idMasuk"));
         Cookie::queue(Cookie::forget("idKeluar"));
 
         return redirect("/scan");
     }
- 
 }
