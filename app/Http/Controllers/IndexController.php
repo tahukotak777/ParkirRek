@@ -118,4 +118,16 @@ class IndexController extends Controller
 
         return redirect("/scan");
     }
+    public function manageUsers()
+    {
+        // Logic to manage users
+        return view('admin.manageUsers');
+    }
+
+    public function settings()
+    {
+        // Logic for settings
+        return view('admin.settings');
+    }
+
 }
